@@ -1,63 +1,56 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { motion } from "framer-motion";
 import { gsap } from "gsap"
 
-function TodoList() {
 
-  const [todos, setTodos] = useState([]);
-  const [completedTodos, setCompletedTodos] = useState([]);
-
-  const handleAddTodo = (event) => {
-    event.preventDefault();
-    const newTodo = event.target.elements.todo.value;
-    if (!newTodo) return;
-    setTodos((prevTodos) => [...prevTodos, newTodo]);
-    event.target.reset();
-    gsap.fromTo(".completed",{
-      opacity:0,
-    }, {
-        duration: 0.5,
-        opacity: 1,
-        y: "1px",
-        ease: "power1.inOut",
-    })
-
-  };
-
-  const handleDeleteTodo = (index) => {
-    setTodos((prevTodos) => prevTodos.filter((todo, i) => i !== index));
-  };
-
-  const handleCompleteTodo = (index) => {
-    const completedTodo = todos[index];
-    setCompletedTodos((prevCompletedTodos) => [
-      ...prevCompletedTodos,
-      completedTodo,
-    ]);
-    handleDeleteTodo(index);
-    gsap.fromTo(".completed2",{
-      opacity:0,
-    }, {
-        duration:0.5,
-        opacity: 1,
-        y: "1px",
-        ease: "power1.inOut",
-    })
-  };
-
-  const handleDeleteCompletedTask = (index) => {
-    setCompletedTodos((prevCompletedTodos) =>
-      prevCompletedTodos.filter((_, i) => i !== index)
-    );
-  };
+  function TodoList() {
+    const [todos, setTodos] = useState([]);
+    const [completedTodos, setCompletedTodos] = useState([]);
+    const inputRef = useRef(null);
+    const listRef = useRef(null);
+  
+    const handleAddTodo = (event) => {
+      event.preventDefault();
+      const newTodo = event.target.elements.todo.value;
+      setTodos([...todos, newTodo]);
+      event.target.reset();
+    };
+  
+    const handleCompleteTodo = (index) => {
+      const completedTodo = todos[index];
+      setCompletedTodos([...completedTodos, completedTodo]);
+      setTodos((prevTodos) => prevTodos.filter((_, i) => i !== index));
+    };
+  
+    const handleDeleteTodo = (index) => {
+      setTodos((prevTodos) => prevTodos.filter((_, i) => i !== index));
+    };
+  
+    const handleDeleteCompletedTask = (index) => {
+      setCompletedTodos((prevCompletedTodos) =>
+        prevCompletedTodos.filter((_, i) => i !== index)
+      );
+    };
+  
+    useEffect(() => {
+      const list = listRef.current;
+      const newestItem = list.lastChild;
+      if (newestItem) {
+        gsap.from(newestItem, {
+          opacity: 0,
+          duration: 0.7,
+          ease: "power1.inOut",
+        });
+      }
+    }, [todos]);
 
   return (
     <div>
       <p className="text-white mb-2 text-3xl mt-28 ">Your todos</p>
       <p className="text-gray-500 mt-4 text-sm">Pending</p>
-      <ul className="mt-1 list">
+      <ul className="mt-1 list" ref={listRef}>
         {todos.map((todo, index) => (
-          <li key={index} className="flex my-2 completed ">
+          <li key={index} className="flex my-2 todo-item ">
           <input
             type="checkbox"
             className="checkbox-custom" 
@@ -83,7 +76,7 @@ function TodoList() {
       
       <ul>
         {completedTodos.map((completedTodo, index) => (
-            <div className="flex flex-row my-2 completed2">
+            <div className="flex flex-row my-2 todo-item2">
                 <svg className="checkbox-custom-completed opacity-25" width="14" height="14" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg">
 <rect width="14" height="14" rx="2" fill="#FFE800"/>
 <path d="M3 7.6L5.54545 10L10 4" stroke="#222222"/>
@@ -105,7 +98,7 @@ function TodoList() {
       <p className="text-white mb-2 text-3xl mt-28 ">New todo</p> 
       <form onSubmit={handleAddTodo}>
         <div className="rounded-sm overflow-hidden">
-            <input className=" p-1 text-gray-500" type="text" name="todo" placeholder="Add a to-do" />
+            <input className=" p-1 text-gray-500" type="text" name="todo" ref={inputRef} placeholder="Add a to-do" />
             <button className="bg-yellow-300 p-1 px-3 rounded-r-sm text-gray-500" type="submit"><p className="hover:rotate-90 transition-all text-md">+</p>
             </button>
         </div>
