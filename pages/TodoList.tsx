@@ -38,7 +38,7 @@ import { gsap } from "gsap"
       if (newestItem) {
         gsap.from(newestItem, {
           opacity: 0,
-          duration: 0.7,
+          duration: 0.5,
           ease: "power1.inOut",
         });
       }
