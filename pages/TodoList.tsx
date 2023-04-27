@@ -76,7 +76,7 @@ import { gsap } from "gsap"
       
       <ul>
         {completedTodos.map((completedTodo, index) => (
-            <div className="flex flex-row my-2 todo-item2">
+            <div className="flex flex-row my-2 todo-item">
                 <svg className="checkbox-custom-completed opacity-25" width="14" height="14" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg">
 <rect width="14" height="14" rx="2" fill="#FFE800"/>
 <path d="M3 7.6L5.54545 10L10 4" stroke="#222222"/>
