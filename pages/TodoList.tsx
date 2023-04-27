@@ -3,14 +3,6 @@ import { motion } from "framer-motion";
 import { gsap } from "gsap"
 
 function TodoList() {
-  useEffect(() => {
-    gsap.fromTo(".body",{
-      opacity:0,
-    }, {
-        opacity: 1,
-        ease: "power1.inOut",
-    })
-}, [])
 
   const [todos, setTodos] = useState([]);
   const [completedTodos, setCompletedTodos] = useState([]);
@@ -24,7 +16,7 @@ function TodoList() {
     gsap.fromTo(".completed",{
       opacity:0,
     }, {
-        duration: 0.2,
+        duration: 0.5,
         opacity: 1,
         y: "1px",
         ease: "power1.inOut",
@@ -46,7 +38,7 @@ function TodoList() {
     gsap.fromTo(".completed2",{
       opacity:0,
     }, {
-        duration:0.2,
+        duration:0.5,
         opacity: 1,
         y: "1px",
         ease: "power1.inOut",
