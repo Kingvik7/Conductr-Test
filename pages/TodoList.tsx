@@ -1,6 +1,17 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
+import { motion } from "framer-motion";
+import { gsap } from "gsap"
 
 function TodoList() {
+  useEffect(() => {
+    gsap.fromTo(".body",{
+      opacity:0,
+    }, {
+        opacity: 1,
+        ease: "power1.inOut",
+    })
+}, [])
+
   const [todos, setTodos] = useState([]);
   const [completedTodos, setCompletedTodos] = useState([]);
 
@@ -10,6 +21,15 @@ function TodoList() {
     if (!newTodo) return;
     setTodos((prevTodos) => [...prevTodos, newTodo]);
     event.target.reset();
+    gsap.fromTo(".completed",{
+      opacity:0,
+    }, {
+        duration: 0.2,
+        opacity: 1,
+        y: "1px",
+        ease: "power1.inOut",
+    })
+
   };
 
   const handleDeleteTodo = (index) => {
@@ -23,6 +43,14 @@ function TodoList() {
       completedTodo,
     ]);
     handleDeleteTodo(index);
+    gsap.fromTo(".completed2",{
+      opacity:0,
+    }, {
+        duration:0.2,
+        opacity: 1,
+        y: "1px",
+        ease: "power1.inOut",
+    })
   };
 
   const handleDeleteCompletedTask = (index) => {
@@ -37,7 +65,7 @@ function TodoList() {
       <p className="text-gray-500 mt-4 text-sm">Pending</p>
       <ul className="mt-1 list">
         {todos.map((todo, index) => (
-          <li key={index} className="flex my-2">
+          <li key={index} className="flex my-2 completed ">
           <input
             type="checkbox"
             className="checkbox-custom" 
@@ -63,7 +91,7 @@ function TodoList() {
       
       <ul>
         {completedTodos.map((completedTodo, index) => (
-            <div className="flex flex-row my-2">
+            <div className="flex flex-row my-2 completed2">
                 <svg className="checkbox-custom-completed opacity-25" width="14" height="14" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg">
 <rect width="14" height="14" rx="2" fill="#FFE800"/>
 <path d="M3 7.6L5.54545 10L10 4" stroke="#222222"/>
@@ -73,10 +101,10 @@ function TodoList() {
    
 
           <button className="text-end pl-4" onClick={() => handleDeleteCompletedTask(index)}><svg className="trash" width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
-<path d="M2 4H3.33333H14" stroke="#F4F4F5" stroke-linecap="round" stroke-linejoin="round"/>
-<path d="M12.6667 3.99999V13.3333C12.6667 13.6869 12.5262 14.0261 12.2761 14.2761C12.0261 14.5262 11.6869 14.6667 11.3333 14.6667H4.66666C4.31304 14.6667 3.9739 14.5262 3.72385 14.2761C3.4738 14.0261 3.33333 13.6869 3.33333 13.3333V3.99999M5.33333 3.99999V2.66666C5.33333 2.31304 5.4738 1.9739 5.72385 1.72385C5.9739 1.4738 6.31304 1.33333 6.66666 1.33333H9.33333C9.68695 1.33333 10.0261 1.4738 10.2761 1.72385C10.5262 1.9739 10.6667 2.31304 10.6667 2.66666V3.99999" stroke="#F4F4F5" stroke-linecap="round" stroke-linejoin="round"/>
-<path d="M6.66667 7.33334V11.3333" stroke="#F4F4F5" stroke-linecap="round" stroke-linejoin="round"/>
-<path d="M9.33333 7.33334V11.3333" stroke="#F4F4F5" stroke-linecap="round" stroke-linejoin="round"/>
+<path d="M2 4H3.33333H14"  stroke-linecap="round" stroke-linejoin="round"/>
+<path d="M12.6667 3.99999V13.3333C12.6667 13.6869 12.5262 14.0261 12.2761 14.2761C12.0261 14.5262 11.6869 14.6667 11.3333 14.6667H4.66666C4.31304 14.6667 3.9739 14.5262 3.72385 14.2761C3.4738 14.0261 3.33333 13.6869 3.33333 13.3333V3.99999M5.33333 3.99999V2.66666C5.33333 2.31304 5.4738 1.9739 5.72385 1.72385C5.9739 1.4738 6.31304 1.33333 6.66666 1.33333H9.33333C9.68695 1.33333 10.0261 1.4738 10.2761 1.72385C10.5262 1.9739 10.6667 2.31304 10.6667 2.66666V3.99999"  stroke-linecap="round" stroke-linejoin="round"/>
+<path d="M6.66667 7.33334V11.3333"  stroke-linecap="round" stroke-linejoin="round"/>
+<path d="M9.33333 7.33334V11.3333"  stroke-linecap="round" stroke-linejoin="round"/>
 </svg>
 </button>
           </div>

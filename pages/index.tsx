@@ -3,23 +3,14 @@ import styles from "../styles/Home.module.css"
 import TodoList from "./TodoList"
 import { useEffect } from "react"
 import gsap from "gsap"
+import motion from 'framer-motion'
 
 export default function Home(): JSX.Element {
     useEffect(() => {
-        gsap.timeline({ delay: 2.5 }).from("#nav", {
-            opacity: 0,
+        gsap.timeline({ delay: 0.6 }).fromTo(".container",{opacity:0, y:"-10px"}, {
+            y: "10px",
+            opacity: 1,
             ease: "power1.inOut",
-        })
-        gsap.to(".Projects", {
-            delay: "0.5",
-            color: "black",
-            // toggleClass: 'active',
-            scrollTrigger: {
-                trigger: "#intro",
-                start: "center",
-                end: 'bottom',
-                scrub: true,
-            },
         })
     }, [])
 
@@ -35,9 +26,8 @@ export default function Home(): JSX.Element {
             <main className={styles.main}>
                 <div className="App">
                     <main
-                        className="container w-80 justify-center heading flex flex-col p-6 border rounded-md"
+                        className="container  w-80 justify-center heading flex flex-col p-6 border rounded-md"
                     >
-
                         <svg className="mb-14" width="85" height="34" viewBox="0 0 85 34" fill="none" xmlns="http://www.w3.org/2000/svg">
 <path d="M13.7922 33.3674C12.1828 33.1024 10.6516 32.6057 9.23382 31.9127L31.4127 9.73382C32.1057 11.1516 32.6024 12.6828 32.8674 14.2922L13.7922 33.3674Z" fill="#FFE800"/>
 <path d="M18.2294 33.5C26.0114 32.6966 32.1966 26.5114 33 18.7294L18.2294 33.5Z" fill="#FFE800"/>
