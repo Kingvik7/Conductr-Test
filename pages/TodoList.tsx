@@ -97,9 +97,9 @@ import { gsap } from "gsap"
       </ul>
       <p className="text-white mb-2 text-3xl mt-28 ">New todo</p> 
       <form onSubmit={handleAddTodo}>
-        <div className="rounded-sm overflow-hidden">
-            <input className=" p-1 text-gray-500" type="text" name="todo" ref={inputRef} placeholder="Add a to-do" />
-            <button className="bg-yellow-300 p-1 px-3 rounded-r-sm text-gray-500" type="submit"><p className="hover:rotate-90 transition-all text-md">+</p>
+        <div className="rounded-md overflow-hidden">
+            <input className=" p-1 px-1 text-gray-500" type="text" name="todo" ref={inputRef} placeholder="Add a to-do" />
+            <button className="bg-yellow-300 p-1 px-3 rounded-r-md text-gray-500" type="submit"><p className="hover:rotate-90 transition-all text-md">+</p>
             </button>
         </div>
       </form>
