@@ -78,7 +78,11 @@ import { gsap } from "gsap"
       
       <ul className="list" >
         {completedTodos.map((completedTodo, index) => (
+<<<<<<< HEAD
             <div className="flex flex-row my-2 todo-item2 fade-in">
+=======
+            <div className="flex flex-row my-2 todo-item">
+>>>>>>> d1197c22246b307f11313d6d84d29aef2724d141
                 <svg className="checkbox-custom-completed opacity-25" width="14" height="14" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg">
                   <rect width="14" height="14" rx="2" fill="#FFE800"/>
                   <path d="M3 7.6L5.54545 10L10 4" stroke="#222222"/>
@@ -101,8 +105,13 @@ import { gsap } from "gsap"
       <p className="text-white mb-2 text-3xl mt-28 ">New todo</p> 
       <form onSubmit={handleAddTodo}>
         <div className="rounded-md overflow-hidden">
+<<<<<<< HEAD
             <input className=" p-1 px-2 h-10 text-gray-500" type="text" name="todo" ref={inputRef} placeholder="Add a to-do" />
             <button className="bg-yellow-300 w-10 rounded-r-md h-10 hover:opacity-80 transition-opacity text-gray-500" type="submit"><p className=" text-md">+</p>
+=======
+            <input className=" p-1 px-1 text-gray-500" type="text" name="todo" ref={inputRef} placeholder="Add a to-do" />
+            <button className="bg-yellow-300 p-1 px-3 rounded-r-md text-gray-500" type="submit"><p className="hover:rotate-90 transition-all text-md">+</p>
+>>>>>>> d1197c22246b307f11313d6d84d29aef2724d141
             </button>
         </div>
       </form>
